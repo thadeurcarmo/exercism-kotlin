@@ -1,0 +1,12 @@
+.keep
+*.kts
+**/gradle/*
+*.bat
+*.bin
+*.lock
+cache.properties
+**/.idea/*
+**/build/
+**/.gradle/*
+**/.exercism/*
+**/gradlew
