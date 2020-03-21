@@ -3,7 +3,7 @@ import kotlin.concurrent.withLock
 
 class BankAccount {
     private var internalBalance = 0L
-    private var closed = false
+    private var open = true
     private val lock = ReentrantLock()
 
     var balance: Long = 0
@@ -17,13 +17,11 @@ class BankAccount {
     }
 
     fun close() = threadSafe {
-        closed = true
+        open = false
     }
 
     private inline fun <T> threadSafe(action: () -> T): T = lock.withLock {
-        if (closed) {
-            throw IllegalStateException("account is closed")
-        }
+        check (open)
         return action()
     }
 }
